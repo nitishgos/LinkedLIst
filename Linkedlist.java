@@ -9,9 +9,11 @@ public class Linkedlist{
     }
     public static Node head;
     public static Node tail;
+    public static int size;
     public  void addFirst(int data){
         //step1= create a node
         Node newNode=new Node(data);
+        size++;
         if(head==null){
             head=tail=newNode;
             return;
@@ -24,6 +26,7 @@ public class Linkedlist{
     public void addLast(int data){
         //step1=create a new node
         Node newnode=new Node(data);
+        size++;
         if(head==null){
             head=tail=newnode;
             return;
@@ -51,6 +54,7 @@ public class Linkedlist{
             return;
         }
         Node newnode=new Node(data);
+        size++;
         Node temp=head;
         int i=0;
         while(i<idx-1){
@@ -60,18 +64,62 @@ public class Linkedlist{
         newnode.next=temp.next;
         temp.next=newnode;
     }
+    public int removeFirst(){
+        if(size==0){
+            System.out.println("LL is empty");
+            return Integer.MIN_VALUE;
+        }else if(size==1){
+            int val=head.data;
+            head=tail=null;
+            size=0;
+            return val;
+        }
+        int val=head.data;
+        head=head.next;
+        size--;
+        return val;
+    }
+    public int removeLast(){
+        if(size==0){
+            System.out.println("ll is empty");
+            return Integer.MIN_VALUE;
+        }else if(size==1){
+            int val=head.data;
+            head=tail=null;
+            size=0;
+            return val;
+        }
+        Node prev =head;
+        for(int i=0;i<size-2;i++){
+            prev=prev.next;
+        }
+        int val=tail.data;
+        prev.next=null;
+        tail=prev;
+        size--;
+        return val;
+    }
+    public int iterativesearch(int key){
+        Node temp=head;
+        int i=0;
+        while(temp!=null){
+            if(temp.data==key){
+                return i;
+            }
+            temp=temp.next;
+            i++;
+        }
+        return -1;
+    }
     public static void main(String[] args) {
         Linkedlist li=new Linkedlist();
-        li.printList();
         li.addFirst(2);
-        li.printList();
         li.addFirst(1);
-        li.printList();
         li.addLast(3);
-        li.printList();
         li.addLast(4);
-        li.printList();
         li.add(2,8);
         li.printList();
+        System.out.println(li.iterativesearch(4));
+        System.out.println(li.iterativesearch(10));
     }
 }
