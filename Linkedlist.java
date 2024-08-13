@@ -139,6 +139,27 @@ public class Linkedlist{
         }
         head=prev;
     }
+    public static void deletenth(int n){
+        Node temp=head;
+        int sz=0;
+        //calcuate size
+        while(temp!=null){
+            temp=temp.next;
+            sz++;
+        }
+        if(sz==n){
+            head=head.next;
+            return;
+        }
+        Node prev=head;
+        int i=1;
+        while(i<(size-n)){
+            prev=prev.next;
+            i++;
+        }
+        prev.next=prev.next.next;
+        return;
+    }
     public static void main(String[] args) {
         Linkedlist li=new Linkedlist();
         li.addFirst(2);
@@ -147,7 +168,7 @@ public class Linkedlist{
         li.addLast(4);
         li.add(2,8);
         li.printList();
-        li.reverse();
+        li.deletenth(3);
         li.printList();
     }
 }
