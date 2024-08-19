@@ -160,15 +160,56 @@ public class Linkedlist{
         prev.next=prev.next.next;
         return;
     }
+    public Node midNode(Node head){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public boolean checkpalin(){
+        Node mid=midNode(head);
+        if(head==null || head.next==null){
+            return true;
+        }
+        Node prev=null;
+        Node curr=mid;
+        Node next;
+        while(curr!=null){
+            next=curr.next; 
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        Node righthead=prev;
+        Node lefthead=head;
+        while(righthead!=null){
+            if(righthead.data!=lefthead.data){
+                return false;
+            }
+            lefthead=lefthead.next;
+            righthead=righthead.next;
+        }
+        return true;
+    }
+    public  boolean isCycle(){
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                return true;
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
         Linkedlist li=new Linkedlist();
-        li.addFirst(2);
-        li.addFirst(1);
-        li.addLast(3);
-        li.addLast(4);
-        li.add(2,8);
-        li.printList();
-        li.deletenth(3);
-        li.printList();
+         head=new Node(1);
+        head.next=new Node(2);
+        System.out.println(li.isCycle());
     }
 }
