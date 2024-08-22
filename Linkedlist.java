@@ -206,10 +206,40 @@ public class Linkedlist{
         }
         return false;
     }
+    public void removeCycle(){
+        Node slow=head;
+        Node fast=head;
+        boolean check=false;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast){
+                check=true;
+                break;
+            }
+        }
+        if(check==false){
+            return;
+        }
+         slow=head;
+         Node prev=null;
+         while(slow!=fast){
+            prev=fast;
+            slow=slow.next;
+            fast=fast.next;
+         }
+         prev.next=null;
+
+    }
     public static void main(String[] args) {
         Linkedlist li=new Linkedlist();
          head=new Node(1);
-        head.next=new Node(2);
+        Node temp=new Node(2);
+        head.next=temp;
+        head.next.next=new Node(3);
+        head.next.next.next=temp;
+        System.out.println(li.isCycle());
+        li.removeCycle();
         System.out.println(li.isCycle());
     }
 }
