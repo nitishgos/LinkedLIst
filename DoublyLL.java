@@ -70,10 +70,23 @@ public class DoublyLL {
         size--;
         return val;
     }
+    public void reverse(){
+        Node curr=head;
+        Node prev=null;
+        Node next;
+        while(curr!=null){
+            next=curr.next;
+            curr.next=prev;
+            curr.prev=next;
+            prev=curr;
+            curr=next;
+        }
+        head=prev;
+    }
     public void print(){
         Node temp=head;
         while(temp!=null){
-            System.out.print(temp.data+"<=>");
+            System.out.print(temp.data+"<->");
             temp=temp.next;
         }
         System.out.println("null");
@@ -85,15 +98,7 @@ public class DoublyLL {
         dll.addFirst(2);
         dll.addFirst(1);
         dll.print();
-        System.out.println(size);
-        dll.removefirst();
-        dll.print();
-        System.out.println(size);
-        dll.addLast(4);
-        dll.addLast(5);
-        dll.print();
-        System.out.println(size);
-        dll.removeLast();
+        dll.reverse();
         dll.print();
     }
 }
