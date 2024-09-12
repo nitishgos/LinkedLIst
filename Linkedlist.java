@@ -314,16 +314,35 @@ public class Linkedlist{
             left=nextL;
         }
     }
+    public static Node getIntersectionNode(Node head1,Node head2){
+        if(head1==null || head2==null){
+            return null;
+        }
+        while(head2!=null){
+            Node temp=head1;
+            while(temp!=null){
+                if(temp==head2){
+                    return head2;
+                }
+                temp=temp.next;
+            }
+            head2=head2.next;
+        }
+        return null;
+    }
     public static void main(String[] args) {
-        Linkedlist li=new Linkedlist();
-         li.addLast(1);
-         li.addLast(2);
-         li.addLast(3);
-         li.addLast(4);
-         li.addLast(5);
-         li.addLast(6);
-         li.printList();
-         li.zigzag();
-         li.printList();
+        Node head1=new Node(10);
+        head1.next=new Node(15);
+        head1.next.next=new Node(30);
+        Node head2=new Node(3);
+        head2.next=new Node(6);
+        head2.next.next=new Node(9);
+        head2.next.next.next=head1.next;
+        Node intersectionnode=getIntersectionNode(head1,head2);
+        if(intersectionnode!=null){
+            System.out.println("Intersection point is - "+intersectionnode.data);
+        }else{
+            System.out.println("No intersection point exist");
+        }
     }
 }
