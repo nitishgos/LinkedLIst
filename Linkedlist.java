@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Linkedlist{
     public static class Node{
         int data;
@@ -5,6 +7,9 @@ public class Linkedlist{
         public Node(int data){
             this.data=data;
             this.next=null;
+        }
+        public Node() {
+            //TODO Auto-generated constructor stub
         }
     }
     public static Node head;
@@ -36,7 +41,7 @@ public class Linkedlist{
         //step3= tail=new node
         tail=newnode;
     }
-    public void printList(){
+    public   void printList(){
         Node temp=head;
         if(head==null){
             System.out.println("The linkedlist is null");
@@ -330,19 +335,36 @@ public class Linkedlist{
         }
         return null;
     }
-    public static void main(String[] args) {
-        Node head1=new Node(10);
-        head1.next=new Node(15);
-        head1.next.next=new Node(30);
-        Node head2=new Node(3);
-        head2.next=new Node(6);
-        head2.next.next=new Node(9);
-        head2.next.next.next=head1.next;
-        Node intersectionnode=getIntersectionNode(head1,head2);
-        if(intersectionnode!=null){
-            System.out.println("Intersection point is - "+intersectionnode.data);
-        }else{
-            System.out.println("No intersection point exist");
+    public   void skipMdeleteN(Node head,int m,int n){
+        Node curr=head,t;
+        while(curr!=null){
+            for(int i=1;i<m && curr!=null;i++){
+                curr=curr.next;
+            }
+                if(curr==null){
+                    return;
+                }
+                t=curr.next;
+                for(int i=1;i<=n && curr!=null;i++){
+                    Node temp=t;
+                    t=t.next;
+                }
+                curr.next=t;
+                curr=t;
         }
     }
+    public static void main(String[] args) {
+    Linkedlist ll=new Linkedlist();
+   ll.head=new Node(1);
+   ll.head.next=new Node(2);
+   ll.head.next.next=new Node(3);
+   ll.head.next.next.next=new Node(4);
+   ll.head.next.next.next.next=new Node(5);
+   ll.head.next.next.next.next.next=new Node(6);
+   ll.head.next.next.next.next.next.next=new Node(7);
+   ll.head.next.next.next.next.next.next.next=new Node(8);
+   ll.printList();
+   ll.skipMdeleteN(ll.head,2,2);
+   ll.printList(); 
+}
 }
